@@ -1,23 +1,20 @@
-// ─── THEME TOGGLE ───
+// ─── THEME TOGGLE (Light is default, dark is opt-in) ───
 (function() {
-  const saved = localStorage.getItem('theme');
-  if (saved === 'light') document.body.classList.add('light');
+  // Always remove any old stored theme — light is the permanent default
+  localStorage.removeItem('theme');
+  // Body stays without 'dark' class = light mode always on fresh load
 })();
-
-function syncToggles() {
-  // both buttons reflect current state
-}
-
+ 
 document.addEventListener('DOMContentLoaded', () => {
-  const btns = [
-    document.getElementById('theme-toggle'),
+  const toggleBtns = [
+    document.getElementById('theme-toggle-mobile'),
     document.getElementById('theme-toggle-desktop')
   ];
-  btns.forEach(btn => {
+  toggleBtns.forEach(btn => {
     if (!btn) return;
     btn.addEventListener('click', () => {
-      const isLight = document.body.classList.toggle('light');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      const isDark = document.body.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   });
 });
